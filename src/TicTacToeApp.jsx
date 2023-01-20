@@ -1,7 +1,7 @@
 import React from 'react';
-import { Square } from './components/Square';
+import { Square,WinnerModal } from './components';
 import { useTicTacToe } from './hooks/useTicTacToe';
-import { TURNS, WINNER } from './types';
+import { TURNS } from './types';
 import './tic-tac-toe.css';
 
 export const TicTacToeApp = () => {
@@ -34,36 +34,18 @@ export const TicTacToeApp = () => {
           })
         }
       </div>
+      
       <div className="turn">
-        <Square isSelected={turn === TURNS.x}>
-          {TURNS.x}
+        <Square isSelected={turn === TURNS.X}>
+          {TURNS.X}
         </Square>
-        <Square isSelected={turn === TURNS.o}>
-          {TURNS.o}
+        <Square isSelected={turn === TURNS.O}>
+          {TURNS.O}
         </Square>
       </div>
+
       {/* Renderizado condicional */}
-      {
-        Boolean(winner) && (
-          <div className="winner">
-            <div className="text">
-              <h2>
-                {
-                  winner === WINNER.XO
-                    ? 'Empate'
-                    : 'Ganó'
-                }
-              </h2>
-              <header className="win">
-                {winner && <Square>{winner}</Square>}
-              </header>
-              <footer>
-                <button onClick={handleResetGame}>Empezar de nuevo</button>
-              </footer>
-            </div>
-          </div>
-        )
-      }
+      <WinnerModal winner={winner} handleResetGame={handleResetGame} />
     </main>
   )
 }
