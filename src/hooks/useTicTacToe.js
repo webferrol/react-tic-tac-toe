@@ -10,9 +10,7 @@ export const useTicTacToe = () => {
       return Array(9).fill(null)
     }),        
     [turn, setTurn] = useState(()=>{
-      const turnFromStorage = getBoardStorage('turn');
-      if(turnFromStorage) return turnFromStorage;
-      return TURNS.X
+      return getBoardStorage('turn') ?? TURNS.X; //menos código que 
     }),
     [winner, setWinner] = useState(null);
 
